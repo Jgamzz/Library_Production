@@ -1,4 +1,9 @@
 package Infra.Entities;
 
-public class Profissao {
+public enum Profissao {
+
+    DEVELOPER,
+    QUALITY_ASSURANCE,
+    SCRUM_MASTER,
+    PRODUCT_OWNER;
 }
