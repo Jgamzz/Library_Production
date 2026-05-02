@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
-
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Slf4j
@@ -16,17 +16,11 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    /**
-     * Busca todos os usuários do banco (Equivalente ao SELECT * FROM User)
-     */
     public List<User> listarTodos() {
         log.info("Buscando todos os usuários no banco de dados");
         return userRepository.findAll();
     }
 
-    /**
-     * Filtra usuários por status ativo e ID de perfil
-     */
     public List<User> buscarUsuariosAtivosPorPerfil(Integer profileId) {
         List<User> todosUsuarios = userRepository.findAll();
 
@@ -36,11 +30,18 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
-    /**
-     * Salva um novo usuário no banco
-     */
     public User salvarUsuario(User user) {
-        log.info("Salvando novo usuário: {}", user.getUsername());
+        log.info("Persistindo usuário: {}", user.getUsername());
         return userRepository.save(user);
+    }
+
+    @Transactional
+    public void deletarUsuario(Integer id) {
+        log.info("Removendo usuário com ID: {}", id);
+        if (userRepository.existsById(id)) {
+            userRepository.deleteById(id);
+        } else {
+            throw new RuntimeException("Usuário não encontrado");
+        }
     }
 }

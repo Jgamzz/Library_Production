@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "Profile")
-@Data // O Lombok cria os Getters e Setters automaticamente
+@Data //
 public class Profile {
 
     @Id
@@ -22,7 +22,6 @@ public class Profile {
     @Column(name = "Is_Active")
     private Boolean isActive = true;
 
-    // Construtor para inicializar a data de criação automaticamente
     @PrePersist
     protected void onCreate() {
         this.creationDate = LocalDateTime.now();

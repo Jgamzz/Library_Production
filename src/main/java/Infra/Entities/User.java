@@ -3,7 +3,6 @@ package Infra.Entities;
 import jakarta.persistence.*;
 import lombok.Data;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.LocalDateTime;
 
 @Entity
@@ -20,20 +19,24 @@ public class User {
     private String name;
 
     @Column(name = "Creation_Date", updatable = false)
-    @JsonIgnore // SOME DO SWAGGER
+    @JsonIgnore
     private LocalDateTime creationDate;
 
     @Column(name = "Is_Active")
-    @JsonIgnore // SOME DO SWAGGER
+    @JsonIgnore
     private Boolean isActive = true;
 
     @Column(name = "Profile_ID")
-    @JsonIgnore // SOME DO SWAGGER
+    @JsonIgnore
     private Integer profileId;
 
     @PrePersist
     protected void onCreate() {
         this.creationDate = LocalDateTime.now();
         if (this.isActive == null) this.isActive = true;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }
