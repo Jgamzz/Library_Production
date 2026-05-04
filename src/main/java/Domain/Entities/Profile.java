@@ -1,17 +1,18 @@
-package Infra.Entities;
+package Domain.Entities;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "Profile")
-@Data //
+@Table(name = "profile") // Nome da tabela no MySQL
+@Getter @Setter // Ou @Data do Lombok
+@NoArgsConstructor
+@AllArgsConstructor
 public class Profile {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Column(nullable = false, length = 50)
     private String name;

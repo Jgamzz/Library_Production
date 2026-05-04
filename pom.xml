@@ -48,7 +48,7 @@
             <version>2.5.0</version>
         </dependency>
 
-        <!-- Lombok (Mantendo sua versão 1.18.46) -->
+        <!-- Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -59,7 +59,6 @@
 
     <build>
         <plugins>
-            <!-- Plugin de Compilação: Configurado para processar o Lombok 1.18.46 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

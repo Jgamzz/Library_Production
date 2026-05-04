@@ -1,7 +1,7 @@
 package Controllers;
 
-import AppService.ProfileService;
-import Infra.Entities.Profile;
+import AppService.ProfileAppService;
+import Domain.Entities.Profile;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -18,10 +18,10 @@ import java.util.List;
 @Tag(name = "Perfis", description = "Endpoints para gerenciamento de perfis")
 public class ProfileController {
 
-    private final ProfileService profileService;
+    private final ProfileAppService profileAppService;
 
-    public ProfileController(ProfileService profileService) {
-        this.profileService = profileService;
+    public ProfileController(ProfileAppService profileAppService) {
+        this.profileAppService = profileAppService;
     }
 
 
@@ -29,6 +29,6 @@ public class ProfileController {
     @GetMapping
     public ResponseEntity<List<Profile>> listarPerfis() {
         log.info("Chamando listagem de perfis do banco.");
-        return ResponseEntity.ok(profileService.listarPerfis());
+        return ResponseEntity.ok(profileAppService.listarPerfis());
     }
 }

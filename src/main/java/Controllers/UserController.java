@@ -1,7 +1,9 @@
 package Controllers;
 
 import AppService.UserService;
-import Infra.Entities.User;
+import DTO.UserAddDTO;
+import DTO.UserListDTO;
+import Domain.Entities.User;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -27,9 +29,9 @@ public class UserController {
 
     @Operation(summary = "Lista todos os usuários do banco", method = "GET")
     @GetMapping
-    public ResponseEntity<List<User>> listarUsuarios() {
+    public ResponseEntity<List<UserListDTO>> listarUsuarios() {
         log.info("Chamando listagem de usuários do banco.");
-        return ResponseEntity.ok(userService.listarTodos());
+        return ResponseEntity.ok(userService.GetAll());
     }
 
     @Operation(summary = "Cria um novo usuário", method = "POST")
@@ -38,10 +40,8 @@ public class UserController {
             @ApiResponse(responseCode = "500", description = "Erro ao salvar no banco")
     })
     @PostMapping
-    public ResponseEntity<User> criarUsuario(@RequestBody User user) {
-        log.info(format("Iniciando persistência do usuário: %s", user.getName()));
-        user.setId(null);
-        User usuarioSalvo = userService.salvarUsuario(user);
+    public ResponseEntity<User> criarUsuario(@RequestBody UserAddDTO userAdd) {
+        User usuarioSalvo = userService.Insert(userAdd.name, userAdd.username, userAdd.password);
         return ResponseEntity.ok(usuarioSalvo);
     }
 

@@ -1,6 +1,6 @@
 package AppService;
 
-import Infra.Entities.Profile;
+import Domain.Entities.Profile;
 import Repository.ProfileRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +9,7 @@ import java.util.List;
 
 @Service
 @Slf4j
-public class ProfileService {
+public class ProfileAppService {
 
     @Autowired
     private ProfileRepository profileRepository;
