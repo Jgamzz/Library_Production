@@ -64,13 +64,13 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User Insert(String name, String userName, String password) {
-       try {
-           var user = new User(name, userName, password);
-           return userRepository.save(user);
-       } catch (Exception e) {
-           throw new RuntimeException(e);
-       }
+    public User Insert(String userName, String password, String name) {
+        try {
+            var user = new User(userName, password, name);
+            return userRepository.save(user);
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao inserir usuário: " + e.getMessage());
+        }
 
     }
 

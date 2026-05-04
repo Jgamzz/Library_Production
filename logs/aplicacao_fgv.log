@@ -1210,3 +1210,159 @@ Consider defining a bean of type 'Repository.ProfileRepository' in your configur
 2026-05-04 19:01:04 INFO  o.a.c.c.C.[.[.[/] : Initializing Spring DispatcherServlet 'dispatcherServlet'
 2026-05-04 19:01:05 INFO  o.s.a.AbstractOpenApiResource : Init duration for springdoc-openapi is: 382 ms
 2026-05-04 19:01:29 INFO  C.UserController : Chamando listagem de usuários do banco.
+2026-05-04 19:24:00 INFO  c.z.h.HikariDataSource : HikariPool-1 - Shutdown initiated...
+2026-05-04 19:24:00 INFO  c.z.h.HikariDataSource : HikariPool-1 - Shutdown completed.
+2026-05-04 19:24:16 INFO  I.SwaggerApplication : Starting SwaggerApplication using Java 26.0.1 with PID 20452 (C:\Users\kaua.moraes\Desktop\Library\library.backend\Library_Production\target\classes started by kaua.moraes in C:\Users\kaua.moraes\Desktop\Library\library.backend\Library_Production)
+2026-05-04 19:24:16 INFO  I.SwaggerApplication : No active profile set, falling back to 1 default profile: "default"
+2026-05-04 19:24:18 INFO  o.a.c.c.StandardService : Starting service [Tomcat]
+2026-05-04 19:24:18 INFO  o.a.c.c.StandardEngine : Starting Servlet engine: [Apache Tomcat/10.1.20]
+2026-05-04 19:24:19 INFO  o.a.c.c.C.[.[.[/] : Initializing Spring embedded WebApplicationContext
+2026-05-04 19:24:20 INFO  c.z.h.HikariDataSource : HikariPool-1 - Starting...
+2026-05-04 19:24:20 INFO  c.z.h.p.HikariPool : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@241fc278
+2026-05-04 19:24:20 INFO  c.z.h.HikariDataSource : HikariPool-1 - Start completed.
+2026-05-04 19:24:23 INFO  I.SwaggerApplication : Started SwaggerApplication in 7.321 seconds (process running for 8.914)
+2026-05-04 19:24:31 INFO  o.a.c.c.C.[.[.[/] : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-05-04 19:24:32 INFO  o.s.a.AbstractOpenApiResource : Init duration for springdoc-openapi is: 474 ms
+2026-05-04 19:27:12 INFO  c.z.h.HikariDataSource : HikariPool-1 - Shutdown initiated...
+2026-05-04 19:27:12 INFO  c.z.h.HikariDataSource : HikariPool-1 - Shutdown completed.
+2026-05-04 19:27:19 INFO  I.SwaggerApplication : Starting SwaggerApplication using Java 26.0.1 with PID 16600 (C:\Users\kaua.moraes\Desktop\Library\library.backend\Library_Production\target\classes started by kaua.moraes in C:\Users\kaua.moraes\Desktop\Library\library.backend\Library_Production)
+2026-05-04 19:27:19 INFO  I.SwaggerApplication : No active profile set, falling back to 1 default profile: "default"
+2026-05-04 19:27:21 INFO  o.a.c.c.StandardService : Starting service [Tomcat]
+2026-05-04 19:27:21 INFO  o.a.c.c.StandardEngine : Starting Servlet engine: [Apache Tomcat/10.1.20]
+2026-05-04 19:27:21 INFO  o.a.c.c.C.[.[.[/] : Initializing Spring embedded WebApplicationContext
+2026-05-04 19:27:22 INFO  c.z.h.HikariDataSource : HikariPool-1 - Starting...
+2026-05-04 19:27:23 INFO  c.z.h.p.HikariPool : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5635bcd2
+2026-05-04 19:27:23 INFO  c.z.h.HikariDataSource : HikariPool-1 - Start completed.
+2026-05-04 19:27:25 INFO  I.SwaggerApplication : Started SwaggerApplication in 6.467 seconds (process running for 7.556)
+2026-05-04 19:27:34 INFO  o.a.c.c.C.[.[.[/] : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-05-04 19:27:34 INFO  o.s.a.AbstractOpenApiResource : Init duration for springdoc-openapi is: 471 ms
+2026-05-04 19:33:10 INFO  c.z.h.HikariDataSource : HikariPool-1 - Shutdown initiated...
+2026-05-04 19:33:10 INFO  c.z.h.HikariDataSource : HikariPool-1 - Shutdown completed.
+2026-05-04 19:33:18 INFO  I.SwaggerApplication : Starting SwaggerApplication using Java 26.0.1 with PID 18692 (C:\Users\kaua.moraes\Desktop\Library\library.backend\Library_Production\target\classes started by kaua.moraes in C:\Users\kaua.moraes\Desktop\Library\library.backend\Library_Production)
+2026-05-04 19:33:18 INFO  I.SwaggerApplication : No active profile set, falling back to 1 default profile: "default"
+2026-05-04 19:33:20 INFO  o.a.c.c.StandardService : Starting service [Tomcat]
+2026-05-04 19:33:20 INFO  o.a.c.c.StandardEngine : Starting Servlet engine: [Apache Tomcat/10.1.20]
+2026-05-04 19:33:20 INFO  o.a.c.c.C.[.[.[/] : Initializing Spring embedded WebApplicationContext
+2026-05-04 19:33:20 INFO  c.z.h.HikariDataSource : HikariPool-1 - Starting...
+2026-05-04 19:33:21 INFO  c.z.h.p.HikariPool : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6d420cdd
+2026-05-04 19:33:21 INFO  c.z.h.HikariDataSource : HikariPool-1 - Start completed.
+2026-05-04 19:33:23 INFO  I.SwaggerApplication : Started SwaggerApplication in 6.288 seconds (process running for 7.292)
+2026-05-04 19:33:30 INFO  o.a.c.c.C.[.[.[/] : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-05-04 19:33:31 INFO  o.s.a.AbstractOpenApiResource : Init duration for springdoc-openapi is: 425 ms
+2026-05-04 19:44:26 INFO  c.z.h.HikariDataSource : HikariPool-1 - Shutdown initiated...
+2026-05-04 19:44:26 INFO  c.z.h.HikariDataSource : HikariPool-1 - Shutdown completed.
+2026-05-04 19:44:34 INFO  I.SwaggerApplication : Starting SwaggerApplication using Java 26.0.1 with PID 22864 (C:\Users\kaua.moraes\Desktop\Library\library.backend\Library_Production\target\classes started by kaua.moraes in C:\Users\kaua.moraes\Desktop\Library\library.backend\Library_Production)
+2026-05-04 19:44:34 INFO  I.SwaggerApplication : No active profile set, falling back to 1 default profile: "default"
+2026-05-04 19:44:36 INFO  o.a.c.c.StandardService : Starting service [Tomcat]
+2026-05-04 19:44:36 INFO  o.a.c.c.StandardEngine : Starting Servlet engine: [Apache Tomcat/10.1.20]
+2026-05-04 19:44:36 INFO  o.a.c.c.C.[.[.[/] : Initializing Spring embedded WebApplicationContext
+2026-05-04 19:44:37 INFO  c.z.h.HikariDataSource : HikariPool-1 - Starting...
+2026-05-04 19:44:37 INFO  c.z.h.p.HikariPool : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@191f4d65
+2026-05-04 19:44:37 INFO  c.z.h.HikariDataSource : HikariPool-1 - Start completed.
+2026-05-04 19:44:40 INFO  I.SwaggerApplication : Started SwaggerApplication in 6.584 seconds (process running for 7.691)
+2026-05-04 19:46:04 INFO  o.a.c.c.C.[.[.[/] : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-05-04 19:46:05 ERROR o.h.e.j.s.SqlExceptionHelper : Table 'library.user' doesn't exist
+2026-05-04 19:46:05 ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.RuntimeException: Erro ao inserir usuário: could not execute statement [Table 'library.user' doesn't exist] [insert into user (creation_date,is_active,name,password,profile_id,username) values (?,?,?,?,?,?)]; SQL [insert into user (creation_date,is_active,name,password,profile_id,username) values (?,?,?,?,?,?)]] with root cause
+java.lang.RuntimeException: Erro ao inserir usuário: could not execute statement [Table 'library.user' doesn't exist] [insert into user (creation_date,is_active,name,password,profile_id,username) values (?,?,?,?,?,?)]; SQL [insert into user (creation_date,is_active,name,password,profile_id,username) values (?,?,?,?,?,?)]
+	at AppService.UserService.Insert(UserService.java:72)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:354)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:716)
+	at AppService.UserService$$SpringCGLIB$$0.Insert(<generated>)
+	at Controllers.UserController.criarUsuario(UserController.java:44)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:255)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:188)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:926)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:831)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:206)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108)
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365)
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:100)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:230)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:175)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:150)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1736)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1516)

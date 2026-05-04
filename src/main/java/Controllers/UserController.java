@@ -41,7 +41,7 @@ public class UserController {
     })
     @PostMapping
     public ResponseEntity<User> criarUsuario(@RequestBody UserAddDTO userAdd) {
-        User usuarioSalvo = userService.Insert(userAdd.name, userAdd.username, userAdd.password);
+        User usuarioSalvo = userService.Insert(userAdd.username, userAdd.password, userAdd.name);
         return ResponseEntity.ok(usuarioSalvo);
     }
 
