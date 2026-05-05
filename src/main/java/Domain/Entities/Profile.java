@@ -1,18 +1,19 @@
 package Domain.Entities;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "profile") // Nome da tabela no MySQL
-@Getter @Setter // Ou @Data do Lombok
+@Table(name = "Profile") // Ajustado para seguir o padrão de tabela
+@Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class Profile {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(nullable = false, length = 50)
     private String name;
@@ -20,8 +21,9 @@ public class Profile {
     @Column(name = "Creation_Date", updatable = false)
     private LocalDateTime creationDate;
 
-    @Column(name = "Is_Active")
-    private Boolean isActive = true;
+    public Profile(String name) {
+        this.name = name;
+    }
 
     @PrePersist
     protected void onCreate() {

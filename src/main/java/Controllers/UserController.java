@@ -36,8 +36,10 @@ public class UserController {
 
     @Operation(summary = "Cria um novo usuário", method = "POST")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Usuário salvo com sucesso"),
-            @ApiResponse(responseCode = "500", description = "Erro ao salvar no banco")
+            @ApiResponse(responseCode = "201", description = "Usuário criado com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Erro na operação - Dados inválidos ou regra de negócio violada"),
+            @ApiResponse(responseCode = "401", description = "Acesso negado - Você precisa estar logado"),
+            @ApiResponse(responseCode = "500", description = "Erro interno no servidor ou falha no banco de dados")
     })
     @PostMapping
     public ResponseEntity<User> criarUsuario(@RequestBody UserAddDTO userAdd) {
