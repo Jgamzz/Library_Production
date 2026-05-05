@@ -1,4 +1,4 @@
-package Infra;
+package Infra.Config;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,7 +18,6 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
         response.setContentType("application/json;charset=UTF-8");
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED); // Define como 401
 
-        // Mensagem amigável que aparecerá no Swagger
         String jsonResponse = "{\"erro\": 401, \"mensagem\": \"Ops! Você precisa estar logado para acessar este recurso. Por favor, faça o login e tente novamente.\"}";
 
         response.getWriter().write(jsonResponse);

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/login")
+@RequestMapping("api/authentication/login")
 @Tag(name = "Autenticação", description = "Endpoint para obter o token de acesso")
 public class AuthenticationController {
 
@@ -34,6 +34,5 @@ public class AuthenticationController {
         return ResponseEntity.ok(new DadosTokenJWT(tokenJWT));
     }
 
-    // Record auxiliar para formatar a saída do JSON no Swagger
     private record DadosTokenJWT(String accessToken) {}
 }

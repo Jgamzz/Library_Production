@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "Profile") // Ajustado para seguir o padrão de tabela
+@Table(name = "Profile")
 @Data
 @NoArgsConstructor
 public class Profile {

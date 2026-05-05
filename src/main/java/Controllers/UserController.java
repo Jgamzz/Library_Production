@@ -3,7 +3,7 @@ package Controllers;
 import AppService.UserAppService;
 import DTO.UserAddDTO;
 import DTO.UserListDTO;
-import DTO.UserProfileDTO; // Novo DTO para o JOIN
+import DTO.UserProfileDTO;
 import Domain.Entities.User;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -37,14 +37,12 @@ public class UserController {
     }
 
     @Operation(summary = "Busca perfil do usuário logado via Token", method = "GET")
-    @GetMapping("/profile/me") // Removemos o {id}
+    @GetMapping("/profile/me")
     public ResponseEntity<UserProfileDTO> buscarMeuPerfil() {
-        // Recupera o usuário autenticado no contexto do Spring Security
         User usuarioLogado = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         log.info("Buscando perfil para o usuário logado: {}", usuarioLogado.getUsername());
 
-        // Usamos o ID do usuário que veio DE DENTRO do token, sem intervenção do usuário
         UserProfileDTO profile = userService.buscarUserProfile(usuarioLogado.getId());
 
         return ResponseEntity.ok(profile);

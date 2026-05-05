@@ -12,13 +12,8 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
 
-    // Método essencial para a autenticação (UserDetails)
     User findByUsername(String username);
 
-    /**
-     * Realiza o INNER JOIN entre User e Profile para o Swagger.
-     * Mapeia os campos id (de User) e name (de Profile) para o UserProfileDTO.
-     */
     @Query("SELECT new DTO.UserProfileDTO(u.id, p.name) " +
             "FROM User u INNER JOIN Profile p ON u.profileId = p.id " +
             "WHERE u.id = :id")

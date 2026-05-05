@@ -1,4 +1,4 @@
-package Infra;
+package Infra.JwtToken;
 
 import Repository.UserRepository;
 import jakarta.servlet.FilterChain;
@@ -34,7 +34,6 @@ public class SecurityFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         } catch (Exception e) {
-            // Se o token for inválido, não limpamos o contexto, o EntryPoint cuidará do 401
             SecurityContextHolder.clearContext();
         }
         filterChain.doFilter(request, response);

@@ -18,13 +18,11 @@ public class Logger {
     public ResponseEntity<Object> handleGeneralException(Exception ex) {
         String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
-        // Pega apenas a primeira linha relevante do erro para não inundar o arquivo
         StackTraceElement firstLine = ex.getStackTrace().length > 0 ? ex.getStackTrace()[0] : null;
         String location = (firstLine != null)
                 ? firstLine.getClassName() + "." + firstLine.getMethodName() + " (Linha: " + firstLine.getLineNumber() + ")"
                 : "Local desconhecido";
 
-        // Log limpo no console/arquivo: Horário - Mensagem - Local
         log.error("[{}] ERRO: {} | LOCAL: {}", timestamp, ex.getMessage() != null ? ex.getMessage() : ex.toString(), location);
 
         Map<String, Object> body = new HashMap<>();

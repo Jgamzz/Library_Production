@@ -19,11 +19,6 @@ public class UserAppService {
 
     @Autowired
     private UserRepository userRepository;
-
-    /**
-     * Realiza a ponte entre o Controller e o Repository para buscar
-     * o perfil resumido via INNER JOIN.
-     */
     public UserProfileDTO buscarUserProfile(Integer id) {
         log.info("Buscando perfil resumido (JOIN) para o usuário ID: {}", id);
         return userRepository.findUserProfileById(id)

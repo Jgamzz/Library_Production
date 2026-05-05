@@ -24,7 +24,6 @@ public class User implements UserDetails {
 
     private String username;
 
-    // Removido o @JsonIgnore daqui para testes, pois o Security precisa ler este campo
     private String password;
 
     private String name;
@@ -51,8 +50,6 @@ public class User implements UserDetails {
         this.creationDate = LocalDateTime.now();
         if (this.isActive == null) this.isActive = true;
     }
-
-    // --- MÉTODOS OBRIGATÓRIOS DO USERDETAILS ---
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

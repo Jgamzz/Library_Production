@@ -1,9 +1,9 @@
-package Infra;
+package Infra.JwtToken;
 
+import Infra.Config.CustomAuthenticationEntryPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -34,13 +34,11 @@ public class SecurityConfigurations {
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
-        // Busca a instância pronta da configuração do Spring, evitando loops de injeção
         return configuration.getAuthenticationManager();
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        // Mantido NoOp para aceitar a senha "1234" do banco em texto puro
         return org.springframework.security.crypto.password.NoOpPasswordEncoder.getInstance();
     }
 }

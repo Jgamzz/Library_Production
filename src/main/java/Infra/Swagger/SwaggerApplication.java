@@ -1,4 +1,4 @@
-package Infra;
+package Infra.Swagger;
 
 import Domain.Entities.Profile;
 import Domain.Entities.User;
@@ -28,25 +28,19 @@ public class SwaggerApplication {
     CommandLineRunner initDatabase(ProfileRepository profileRepository,
                                    UserRepository userRepository) {
         return args -> {
-            // 1. Inserção de Perfis padrão se a tabela estiver vazia
             if (profileRepository.count() == 0) {
                 log.info("Inserindo perfis padrão...");
                 profileRepository.save(new Profile("Administrator"));
                 profileRepository.save(new Profile("User"));
             }
 
-            // 2. Criação do Usuário Admin com senha em texto puro (sem prefixo {noop})
             if (userRepository.findByUsername("admin") == null) {
                 log.info("Criando usuário administrativo com senha limpa...");
 
                 User admin = new User();
                 admin.setName("admin");
                 admin.setUsername("admin");
-
-                // Salva apenas "1234" no banco de dados
                 admin.setPassword("1234");
-
-                admin.setProfileId(1); // ID 1 corresponde ao Administrator
                 admin.setIsActive(true);
 
                 userRepository.save(admin);
