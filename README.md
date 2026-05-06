@@ -4,7 +4,7 @@ API backend para gerenciamento de biblioteca, com autenticacao JWT, controle de 
 
 ## Nome do projeto
 **Library API**
-(artifact atual no Maven: `Teste1`)
+(artifact atual no Maven: `Library`)
 
 ## Descricao
 Este projeto e uma API REST em Java com Spring Boot que oferece:
@@ -85,6 +85,30 @@ cd Library_Production
 Crie o banco:
 ```sql
 CREATE DATABASE Library;
+
+CREATE TABLE User (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    Username VARCHAR(50) NOT NULL UNIQUE,
+    Password VARCHAR(50) NOT NULL,
+    Name VARCHAR(100) NOT NULL,
+    Creation_Date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    Is_Active BOOLEAN DEFAULT TRUE,
+    Profile_ID INT,
+    CONSTRAINT FK_UserProfile FOREIGN KEY (Profile_ID) 
+    REFERENCES Profile(ID) ON DELETE SET NULL
+);
+
+CREATE TABLE Profile (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    Name VARCHAR(50) NOT NULL,
+    Creation_Date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    Is_Active BOOLEAN DEFAULT TRUE
+);
+
+Select * FROM  Profile
+Select * FROM User
+
+DROP TABLE Profile;
 ```
 
 ### 3) Executar a aplicacao
