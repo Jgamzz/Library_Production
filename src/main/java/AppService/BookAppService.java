@@ -62,9 +62,31 @@ public class BookAppService {
 
     @Transactional
     public void deletar(Integer id) {
-        if (!bookRepository.existsById(id)) {
-            throw new RuntimeException("Livro não encontrado para exclusão");
+        // 1. Buscar o livro para obter o nome da imagem antes de deletar
+        Book book = bookRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Livro não encontrado para exclusão"));
+
+        // 2. Extrair o nome do arquivo da URL (ex: de http://localhost:8080/uploads/guid.jpg para guid.jpg)
+        String imageUrl = book.getImage();
+        if (imageUrl != null && imageUrl.contains("/uploads/")) {
+            String fileName = imageUrl.substring(imageUrl.lastIndexOf("/") + 1);
+            Path filePath = Paths.get(uploadFolder).resolve(fileName);
+
+            try {
+                // 3. Deletar o arquivo físico no Desktop
+                if (Files.exists(filePath)) {
+                    Files.delete(filePath);
+                    log.info("Imagem deletada com sucesso: {}", fileName);
+                }
+            } catch (IOException e) {
+                log.error("Erro ao deletar arquivo físico: {}", e.getMessage());
+                throw  new RuntimeException("Falha ao fazer excluão so livro! ");
+                // Opcional: Você pode decidir se interrompe a transação ou apenas loga o erro
+            }
         }
-        bookRepository.deleteById(id);
+
+        // 4. Deletar o registro no banco de dados
+        bookRepository.delete(book);
+        log.info("Registro do livro ID {} removido do banco.", id);
     }
 }
