@@ -23,9 +23,7 @@ public class User implements UserDetails {
     private Integer id;
 
     private String username;
-
     private String password;
-
     private String name;
 
     @Column(name = "creation_date", updatable = false)
@@ -37,34 +35,47 @@ public class User implements UserDetails {
     @Column(name = "profile_id")
     private Integer profileId;
 
+    // Construtor padrão para novos cadastros (ex: via formulário)
     public User(String username, String password, String name) {
         this.username = username;
         this.password = password;
         this.name = name;
         this.isActive = true;
-        this.profileId = 2;
+        this.profileId = 2; // Default para novos usuários comuns
     }
 
     @PrePersist
     protected void onCreate() {
         this.creationDate = LocalDateTime.now();
+
         if (this.isActive == null) this.isActive = true;
+
+        // REGRA DE OURO:
+        // Se for o primeiro usuário ("admin"), o profileId deve ser 1.
+        // Se for qualquer outro e o profileId veio vazio, vira 2.
+        if (this.profileId == null) {
+            if ("admin".equalsIgnoreCase(this.username)) {
+                this.profileId = 1;
+            } else {
+                this.profileId = 2;
+            }
+        }
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
+        // Se profileId for 1, ele é ADMIN
+        if (Integer.valueOf(1).equals(this.profileId)) {
+            return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        }
         return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
     @Override
-    public String getPassword() {
-        return this.password;
-    }
+    public String getPassword() { return this.password; }
 
     @Override
-    public String getUsername() {
-        return this.username;
-    }
+    public String getUsername() { return this.username; }
 
     @Override
     @JsonIgnore
