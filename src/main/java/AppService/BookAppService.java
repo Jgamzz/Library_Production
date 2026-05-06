@@ -62,18 +62,15 @@ public class BookAppService {
 
     @Transactional
     public void deletar(Integer id) {
-        // 1. Buscar o livro para obter o nome da imagem antes de deletar
         Book book = bookRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Livro não encontrado para exclusão"));
 
-        // 2. Extrair o nome do arquivo da URL (ex: de http://localhost:8080/uploads/guid.jpg para guid.jpg)
         String imageUrl = book.getImage();
         if (imageUrl != null && imageUrl.contains("/uploads/")) {
             String fileName = imageUrl.substring(imageUrl.lastIndexOf("/") + 1);
             Path filePath = Paths.get(uploadFolder).resolve(fileName);
 
             try {
-                // 3. Deletar o arquivo físico no Desktop
                 if (Files.exists(filePath)) {
                     Files.delete(filePath);
                     log.info("Imagem deletada com sucesso: {}", fileName);
@@ -85,8 +82,45 @@ public class BookAppService {
             }
         }
 
-        // 4. Deletar o registro no banco de dados
+
         bookRepository.delete(book);
         log.info("Registro do livro ID {} removido do banco.", id);
+    }
+    @Transactional
+    public Book atualizarComImagem(Integer id, String bookJson, MultipartFile image) throws IOException {
+
+        Book livroExistente = bookRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Livro não encontrado com ID: " + id));
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        BookAddDTO bookDto = objectMapper.readValue(bookJson, BookAddDTO.class);
+
+        livroExistente.setName(bookDto.getName());
+        livroExistente.setDescription(bookDto.getDescription());
+        livroExistente.setAuthor(bookDto.getAuthor());
+        livroExistente.setReleaseYear(bookDto.getReleaseYear());
+
+        if (image != null && !image.isEmpty()) {
+            deletarArquivoFisico(livroExistente.getImage());
+
+            String extension = image.getOriginalFilename().substring(image.getOriginalFilename().lastIndexOf("."));
+            String fileName = UUID.randomUUID().toString() + extension;
+            Path path = Paths.get(uploadFolder);
+            Files.copy(image.getInputStream(), path.resolve(fileName), StandardCopyOption.REPLACE_EXISTING);
+
+            livroExistente.setImage("http://localhost:8080/uploads/" + fileName);
+        }
+        return bookRepository.save(livroExistente);
+    }
+
+    private void deletarArquivoFisico(String imageUrl) {
+        if (imageUrl != null && imageUrl.contains("/uploads/")) {
+            String fileName = imageUrl.substring(imageUrl.lastIndexOf("/") + 1);
+            try {
+                Files.deleteIfExists(Paths.get(uploadFolder).resolve(fileName));
+            } catch (IOException e) {
+                log.error("Erro ao remover imagem antiga: " + e.getMessage());
+            }
+        }
     }
 }

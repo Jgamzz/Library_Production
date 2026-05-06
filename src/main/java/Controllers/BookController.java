@@ -37,10 +37,16 @@ public class BookController {
         return ResponseEntity.status(201).body(novoLivro);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Book> atualizar(@PathVariable Integer id, @RequestBody Book book) {
-        book.setId(id);
-        return ResponseEntity.ok(bookAppService.salvar(book));
+    @PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @Operation(summary = "Atualiza livro e imagem existente")
+    public ResponseEntity<Book> atualizar(
+            @PathVariable Integer id,
+            @RequestPart("bookDto") @io.swagger.v3.oas.annotations.media.Schema(implementation = BookAddDTO.class) String bookJson,
+            @RequestPart(value = "image", required = false) MultipartFile image) throws IOException {
+
+        // Chama o service passando o ID da URL para garantir a atualização
+        Book livroAtualizado = bookAppService.atualizarComImagem(id, bookJson, image);
+        return ResponseEntity.ok(livroAtualizado);
     }
 
     @DeleteMapping("/{id}")
