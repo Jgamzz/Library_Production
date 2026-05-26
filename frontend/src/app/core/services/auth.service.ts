@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { Observable, tap } from 'rxjs';
 
 @Injectable({
@@ -8,40 +9,39 @@ import { Observable, tap } from 'rxjs';
 export class AuthService {
   private apiUrl = '/api';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
-  login(dados: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/authentication/login`, dados).pipe(
+  login(credenciais: any): Observable<any> {
+    return this.http.post<any>(`${`${this.apiUrl}/authentication/login`}`, credenciais).pipe(
       tap(res => {
         if (res && res.accessToken) {
           localStorage.setItem('token', res.accessToken);
-          this.salvarDadosPerfil(res.accessToken);
+          this.decodeAndSaveProfile(res.accessToken);
         }
       })
     );
   }
 
+  // 🎯 O MÉTODO QUE ESTAVA FALTANDO E QUEBROU O SEU COMPILADOR:
   cadastro(dados: any): Observable<any> {
-    // Envia os dados para o seu UserController @PostMapping
-    return this.http.post<any>(`${this.apiUrl}/users`, dados);
+    return this.http.post<any>(`${`${this.apiUrl}/users`}`, dados);
   }
 
-  private salvarDadosPerfil(token: string) {
+  private decodeAndSaveProfile(token: string) {
     try {
       const payload = JSON.parse(atob(token.split('.')[1]));
       localStorage.setItem('userId', payload.id);
 
-      // Consome o seu endpoint /api/users/profile/me para identificar o perfil
-      this.http.get<any>(`${this.apiUrl}/users/profile/me`, {
+      this.http.get<any>(`${`${this.apiUrl}/users/profile/me`}`, {
         headers: { Authorization: `Bearer ${token}` }
       }).subscribe({
         next: (profile) => {
-          localStorage.setItem('profileName', profile.name); // Salva se é "ADMIN" ou "USER"
+          localStorage.setItem('profileName', profile.name.toUpperCase());
         },
-        error: (err) => console.error('Erro ao buscar perfil detalhado', err)
+        error: (err) => console.error('Erro ao recuperar perfil do usuário', err)
       });
     } catch (e) {
-      console.error('Erro ao decodificar o token JWT', e);
+      console.error('Falha ao decodificar payload do token JWT', e);
     }
   }
 
@@ -56,6 +56,8 @@ export class AuthService {
 
   logout() {
     localStorage.clear();
-    window.location.reload();
+    this.router.navigate(['/login']).then(() => {
+      window.location.reload();
+    });
   }
 }

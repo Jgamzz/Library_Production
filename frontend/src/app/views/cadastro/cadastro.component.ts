@@ -18,7 +18,7 @@ import { AuthService } from '../../core/services/auth.service';
             <input type="text" [(ngModel)]="usuario.name" name="name" required placeholder="Seu nome">
           </div>
           <div class="input-group">
-            <label>Username (E-mail / Login)</label>
+            <label>Username </label>
             <input type="text" [(ngModel)]="usuario.username" name="username" required placeholder="Seu login de acesso">
           </div>
           <div class="input-group">
