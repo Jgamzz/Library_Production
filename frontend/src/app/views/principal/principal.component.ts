@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { BookService } from './../../core/services/book.service';
 import { AuthService } from './../../core/services/auth.service';
+import { UserService } from '../../core/services/user.service';
+import { Perfil } from '../../core/models/perfil';
 
 @Component({
   selector: 'app-principal',
@@ -16,11 +18,8 @@ import { AuthService } from './../../core/services/auth.service';
           <h3>LIBRARY</h3>
         </div>
         <nav class="nav-group">
-          <button class="nav-btn active">
-            <i class="fa-solid fa-book"></i> Ver Livros
-          </button>
 
-          <button (click)="abrirModal()" class="btn-create-trigger">
+          <button *ngIf="perfil && perfil.name == 'Administrator'" (click)="abrirModal()" class="btn-create-trigger">
             <i class="fa-solid fa-plus"></i> + Criar Livro
           </button>
 
@@ -34,8 +33,8 @@ import { AuthService } from './../../core/services/auth.service';
       </aside>
 
       <main class="main-content">
-        <header class="top-header">
-          <h1>Biblioteca <span class="badge">{{ isAdmin ? 'Editor' : 'Editor' }}</span></h1>
+        <header  class="top-header">
+          <h1 >Biblioteca <span class="badge" *ngIf="">Editor</span></h1>
         </header>
 
         <div class="content-padding">
@@ -54,7 +53,7 @@ import { AuthService } from './../../core/services/auth.service';
                   <p class="year">Ano: {{ livro.releaseYear }}</p>
                 </div>
                 <div class="admin-actions">
-                  <button (click)="deletarLivro(livro.id); $event.stopPropagation()" class="btn-delete">Deletar</button>
+                  <button *ngIf="perfil && perfil.name == 'Administrator'" (click)="deletarLivro(livro.id); $event.stopPropagation()" class="btn-delete">Deletar</button>
                 </div>
               </div>
             </div>
@@ -88,7 +87,7 @@ import { AuthService } from './../../core/services/auth.service';
 
             <div class="form-group">
               <label>Descrição / Sinopse</label>
-              <textarea [(ngModel)]="novoLivro.description" name="description" rows="3" placeholder="Sinopse detalhada do JSON para o Swagger..." required></textarea>
+              <textarea [(ngModel)]="novoLivro.description" name="description" rows="3" placeholder="Descrição do livro" required></textarea>
             </div>
 
             <div class="form-group">
@@ -186,12 +185,27 @@ export class PrincipalComponent implements OnInit {
   exibirModal = false; // Estado do pop-up
   selectedFile: File | null = null;
   novoLivro = { name: '', author: '', description: '', releaseYear: 2026 };
-
-  constructor(private bookService: BookService, public authService: AuthService, private router: Router) {}
+  perfil: Perfil | undefined;
+  constructor(private bookService: BookService, 
+              public authService: AuthService, 
+              private router: Router,
+              private userService: UserService) {}
 
   ngOnInit() {
-    this.isAdmin = this.authService.isAdmin();
+
     this.carregarLivros();
+    this.carregarPerfil();
+  }
+
+  carregarPerfil(){
+    this.userService.obter()
+          .subscribe({
+            next: (items)=> {
+              this.perfil = items
+                  this.isAdmin = this.perfil && this.perfil.name == 'Administrator'
+            },
+            error: () => console.error('Erro ao buscar acervo.')
+          })
   }
 
   carregarLivros() {
