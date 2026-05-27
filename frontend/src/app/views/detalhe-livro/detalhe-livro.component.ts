@@ -86,7 +86,8 @@ import { AuthService } from '../../core/services/auth.service';
     .year { font-size: 14px; font-weight: bold; color: #039BE5; }
     hr { border: 0; border-top: 1px solid #eee; margin: 20px 0; }
     h3 { color: #2c3e50; margin-bottom: 10px; font-weight: 600; }
-    .description { line-height: 1.7; color: #555; text-align: justify; margin-bottom: 30px; white-space: pre-line; flex-grow: 1; }
+    .description {  padding-left: 2px; ;  padding-right: 2px; overflow: auto;
+    max-height: 200px; line-height: 1.7; color: #555; text-align: justify; margin-bottom: 30px; white-space: pre-line; flex-grow: 1; }
     
     .action-row { display: flex; gap: 15px; margin-top: auto; }
     .back-btn { padding: 12px 20px; background: #34495e; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: bold; transition: 0.2s; }
