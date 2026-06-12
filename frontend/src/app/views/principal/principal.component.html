@@ -1,0 +1,133 @@
+<div class="dashboard">
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <h3>LIBRARY</h3>
+    </div>
+    <nav class="nav-group">
+      <button type="button" *ngIf="perfil && perfil.name == 'Administrator'" (click)="abrirModal()" class="btn-create-trigger">
+        <i class="fa-solid fa-plus"></i> + Criar Livro
+      </button>
+
+      <div class="divider"></div>
+      <p class="nav-label">ORDENAÇÃO</p>
+      <button type="button" (click)="ordenar('AZ')" class="nav-btn-sub">A - Z</button>
+      <button type="button" (click)="ordenar('ZA')" class="nav-btn-sub">Z - A</button>
+    </nav>
+
+    <button type="button" (click)="authService.logout()" class="btn-logout">Sair do Sistema</button>
+  </aside>
+
+  <main class="main-content">
+    <header class="top-header">
+      <h1>Biblioteca 
+            <span class="badge" *ngIf="perfil && perfil.name === 'Administrator'">Editor</span>      </h1>
+    </header>
+
+    <div class="content-padding">
+      <section class="books-display">
+        <h2 class="section-title">Livros Disponíveis</h2>
+
+        <div class="books-grid">
+          <div class="book-card" *ngFor="let livro of livros" (click)="verDetalhes(livro.id)">
+            <div class="book-cover">
+              <img [src]="livro.image ? livro.image : 'https://via.placeholder.com/200x300?text=Sem+Capa'" alt="Capa">
+              <div class="overlay">Visualizar</div>
+            </div>
+            <div class="book-info">
+              <h4>{{ livro.name }}</h4>
+              <p class="author">Autor: {{ livro.author }}</p>
+              <p class="year">Ano: {{ livro.releaseYear }}</p>
+            </div>
+            
+            <div class="admin-actions" *ngIf="perfil && perfil.name == 'Administrator'">
+              <button type="button" (click)="abrirModalEdicao(livro); $event.stopPropagation()" class="btn-edit">Editar</button>
+              <button type="button" (click)="deletarLivro(livro.id); $event.stopPropagation()" class="btn-delete">Deletar</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div class="modal-overlay" *ngIf="exibirModal || exibirModalEdicao">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2>{{ exibirModalEdicao ? 'Atualizar Cadastro do Livro' : 'Novo Registro de Livro' }}</h2>
+        <button type="button" class="btn-close" (click)="fecharQualquerModal()">&times;</button>
+      </div>
+
+      <form *ngIf="exibirModal" (ngSubmit)="salvarNovoLivro()" class="modal-form">
+        <div class="form-group">
+          <label>Nome do Livro</label>
+          <input type="text" [(ngModel)]="novoLivro.name" name="name" placeholder="Ex: Resident Evil: Code Veronica" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Autor</label>
+            <input type="text" [(ngModel)]="novoLivro.author" name="author" placeholder="Ex: S. D. Perry" required>
+          </div>
+          <div class="form-group">
+            <label>Ano Lançamento</label>
+            <input type="number" [(ngModel)]="novoLivro.releaseYear" name="releaseYear" placeholder="2026" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Descrição / Sinopse</label>
+          <textarea [(ngModel)]="novoLivro.description" name="description" rows="3" placeholder="Descrição do livro" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Capa do Livro (Obrigatória)</label>
+          <div class="file-drop-area">
+            <input type="file" (change)="onFileSelected($event)" required>
+            <p>Selecione o arquivo de imagem para upload</p>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn-modal-cancel" (click)="fecharQualquerModal()">Cancelar</button>
+          <button type="submit" class="btn-modal-save">Salvar Registro</button>
+        </div>
+      </form>
+
+      <form *ngIf="exibirModalEdicao" (ngSubmit)="salvarEdicaoLivro()" class="modal-form">
+        <div class="form-group">
+          <label>Nome do Livro</label>
+          <input type="text" [(ngModel)]="livroEdicao.name" name="name" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Autor</label>
+            <input type="text" [(ngModel)]="livroEdicao.author" name="author" required>
+          </div>
+          <div class="form-group">
+            <label>Ano Lançamento</label>
+            <input type="number" [(ngModel)]="livroEdicao.releaseYear" name="releaseYear" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Descrição / Sinopse</label>
+          <textarea [(ngModel)]="livroEdicao.description" name="description" rows="3" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Capa do Livro (Opcional se manter a atual)</label>
+          <div class="file-drop-area">
+            <input type="file" (change)="onFileSelectedEdicao($event)">
+            <p>Selecione o arquivo de imagem para upload</p>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn-modal-cancel" (click)="fecharQualquerModal()">Cancelar</button>
+          <button type="submit" class="btn-modal-save">Salvar Alterações (PUT)</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>

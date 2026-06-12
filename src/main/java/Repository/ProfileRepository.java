@@ -1,6 +1,6 @@
 package Repository;
 
-import Infra.Entities.Profile;
+import Domain.Entities.Profile;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
