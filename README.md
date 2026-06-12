@@ -1,53 +1,82 @@
 # 📚 Library Production
 
-Sistema de gerenciamento de biblioteca desenvolvido com Angular 19, permitindo autenticação de usuários, gerenciamento de livros e controle de acesso administrativo.
+Sistema de gerenciamento de biblioteca desenvolvido com **Angular 19**, integrado a uma API REST responsável pela autenticação de usuários, gerenciamento de perfis e controle do acervo de livros.
+
+O projeto foi construído seguindo uma arquitetura moderna baseada em componentes, serviços e comunicação via API REST utilizando autenticação JWT.
 
 ---
 
 ## 🚀 Tecnologias Utilizadas
 
 ### Frontend
-- Angular 19
-- TypeScript
-- RxJS
-- Angular Router
-- Angular Forms
-- HTML5
-- CSS3
 
-### Integração
-- REST API
-- JWT Authentication
-- HttpClient
+* Angular 19
+* TypeScript
+* RxJS
+* Angular Router
+* Angular Forms
+* HTML5
+* CSS3
+
+### Backend
+
+* Java
+* Spring Boot
+* Spring Data JPA
+* Hibernate
+* JWT Authentication
+* Maven
+
+### Banco de Dados
+
+* MySQL
 
 ---
 
 ## ✨ Funcionalidades
 
 ### 🔐 Autenticação
-- Login de usuários
-- Armazenamento de token JWT
-- Controle de sessão
-- Logout seguro
 
-### 👤 Cadastro
-- Cadastro de novos usuários
-- Integração com API de usuários
+* Login de usuários
+* Geração e validação de Token JWT
+* Controle de sessão
+* Logout
+
+### 👤 Usuários
+
+* Cadastro de usuários
+* Consulta de perfil do usuário logado
+* Controle de permissões
 
 ### 📚 Livros
-- Listagem de livros
-- Visualização de detalhes
-- Cadastro de livros
-- Atualização de informações
-- Exclusão de livros
+
+* Listagem de livros
+* Consulta de detalhes
+* Cadastro de livros
+* Atualização de livros
+* Exclusão de livros
 
 ### 🛠 Administração
-- Área administrativa para gerenciamento do acervo
-- Controle de permissões baseado em perfil
+
+* Gerenciamento do acervo
+* Controle de usuários
+* Controle de perfis
 
 ---
 
-## 📂 Estrutura do Projeto
+## 🏗 Arquitetura
+
+```text
+Frontend (Angular)
+        │
+        ▼
+REST API (Spring Boot)
+        │
+        ▼
+MySQL Database
+```
+
+### Estrutura Frontend
 
 ```text
 src/
@@ -56,8 +85,8 @@ src/
 │   │   ├── models/
 │   │   └── services/
 │   │       ├── auth.service.ts
-│   │       ├── book.service.ts
-│   │       └── user.service.ts
+│   │       ├── user.service.ts
+│   │       └── book.service.ts
 │   │
 │   ├── views/
 │   │   ├── login/
@@ -74,15 +103,102 @@ src/
 
 ---
 
-## 🗺 Rotas da Aplicação
+## 🗄️ Banco de Dados
 
-| Rota | Descrição |
-|--------|------------|
-| `/login` | Tela de login |
-| `/cadastro` | Cadastro de usuários |
-| `/principal` | Página principal |
-| `/livro/:id` | Detalhes do livro |
-| `/admin/livros` | Gerenciamento de livros |
+O sistema utiliza MySQL para persistência dos dados.
+
+### Tabela: Profile
+
+Responsável pelos perfis de acesso do sistema.
+
+```sql
+CREATE TABLE Profile (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    Name VARCHAR(50) NOT NULL,
+    Creation_Date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    Is_Active BOOLEAN DEFAULT TRUE
+);
+```
+
+### Tabela: User
+
+Responsável pelo cadastro dos usuários da aplicação.
+
+```sql
+CREATE TABLE User (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    Username VARCHAR(50) NOT NULL UNIQUE,
+    Password VARCHAR(50) NOT NULL,
+    Name VARCHAR(100) NOT NULL,
+    Creation_Date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    Is_Active BOOLEAN DEFAULT TRUE,
+    Profile_ID INT,
+    CONSTRAINT FK_UserProfile FOREIGN KEY (Profile_ID)
+    REFERENCES Profile(ID) ON DELETE SET NULL
+);
+```
+
+### Tabela: Book
+
+A tabela de livros **não precisa ser criada manualmente**.
+
+Ela é gerada automaticamente pelo backend através do **Hibernate/JPA**, utilizando as entidades mapeadas na aplicação Spring Boot.
+
+Ao iniciar o backend com a configuração adequada:
+
+```properties
+spring.jpa.hibernate.ddl-auto=update
+```
+
+o Hibernate cria e atualiza automaticamente a estrutura da tabela de livros no banco de dados.
+
+---
+
+## 🔗 Modelo Relacional
+
+```text
+┌─────────────────┐
+│     Profile     │
+├─────────────────┤
+│ PK ID           │
+│ Name            │
+│ Creation_Date   │
+│ Is_Active       │
+└────────┬────────┘
+         │ 1
+         │
+         │ N
+┌────────▼────────┐
+│      User       │
+├─────────────────┤
+│ PK ID           │
+│ Username        │
+│ Password        │
+│ Name            │
+│ Creation_Date   │
+│ Is_Active       │
+│ FK Profile_ID   │
+└─────────────────┘
+
+┌─────────────────┐
+│      Book       │
+├─────────────────┤
+│ Auto Generated  │
+│ By Hibernate    │
+└─────────────────┘
+```
+
+---
+
+## 🌐 Rotas da Aplicação
+
+| Rota          | Descrição               |
+| ------------- | ----------------------- |
+| /login        | Tela de login           |
+| /cadastro     | Cadastro de usuários    |
+| /principal    | Página principal        |
+| /livro/:id    | Detalhes do livro       |
+| /admin/livros | Gerenciamento de livros |
 
 ---
 
@@ -94,19 +210,13 @@ src/
 git clone git@github.com:Jgamzz/Library_Production.git
 ```
 
-### 2. Acessar o projeto
-
-```bash
-cd frontend
-```
-
-### 3. Instalar dependências
+### 2. Instalar dependências
 
 ```bash
 npm install
 ```
 
-### 4. Executar aplicação
+### 3. Executar aplicação
 
 ```bash
 ng serve
@@ -120,36 +230,46 @@ npm start
 
 ---
 
-## 🌐 Acesso
+## 🚀 Executando o Backend
 
-Após iniciar o servidor:
+Configurar o banco de dados MySQL e iniciar a API Spring Boot:
+
+```bash
+mvn clean install
+mvn spring-boot:run
+```
+
+---
+
+## 🌍 Acesso
+
+Frontend:
 
 ```text
 http://localhost:4200
+```
+
+Backend:
+
+```text
+http://localhost:8080
 ```
 
 ---
 
 ## 🔑 Autenticação
 
-A aplicação utiliza:
-
-- JWT (JSON Web Token)
-- Header Authorization Bearer Token
-- Controle de perfil de usuário
-- Permissões administrativas
+A aplicação utiliza JWT (JSON Web Token) para autenticação.
 
 Exemplo:
 
 ```http
-Authorization: Bearer eyJhbGciOi...
+Authorization: Bearer eyJhbGciOiJIUzI1NiIs...
 ```
 
 ---
 
-## 🔄 Comunicação com API
-
-Endpoints utilizados:
+## 🔄 Endpoints Utilizados
 
 ### Autenticação
 
@@ -161,41 +281,53 @@ POST /api/authentication/login
 
 ```http
 POST /api/users
+
 GET /api/users/profile/me
 ```
 
 ### Livros
 
 ```http
-GET    /api/books
-GET    /api/books/{id}
-POST   /api/books
-PUT    /api/books/{id}
+GET /api/books
+
+GET /api/books/{id}
+
+POST /api/books
+
+PUT /api/books/{id}
+
 DELETE /api/books/{id}
 ```
 
 ---
 
-## 📸 Telas
+## 📸 Telas do Sistema
 
 ### Login
-- Autenticação do usuário
+
+Permite autenticação dos usuários.
 
 ### Cadastro
-- Registro de novos usuários
+
+Permite criação de novos usuários.
 
 ### Página Principal
-- Visualização do acervo
+
+Exibe os livros cadastrados.
 
 ### Detalhes do Livro
-- Informações completas do livro
 
-### Administração
-- Cadastro e gerenciamento de livros
+Visualização completa das informações do livro.
+
+### Gerenciamento de Livros
+
+Área administrativa para cadastro, edição e remoção de livros.
 
 ---
 
-## 🧪 Executando Testes
+## 🧪 Testes
+
+Executar os testes do Angular:
 
 ```bash
 ng test
@@ -203,7 +335,7 @@ ng test
 
 ---
 
-## 📦 Build para Produção
+## 📦 Build de Produção
 
 ```bash
 ng build
@@ -219,25 +351,25 @@ dist/
 
 ## 🔮 Melhorias Futuras
 
-- [ ] Recuperação de senha
-- [ ] Upload avançado de imagens
-- [ ] Filtro e busca de livros
-- [ ] Dashboard administrativo
-- [ ] Histórico de empréstimos
-- [ ] Responsividade mobile
+* Recuperação de senha
+* Dashboard administrativo
+* Upload de imagens para livros
+* Sistema de empréstimos
+* Controle de reservas
+* Histórico de movimentações
+* Responsividade mobile
 
 ---
 
 ## 👨‍💻 Desenvolvedor
 
-**Kauã Teixeira Moraes**
+Kauã Teixeira Moraes
 
 GitHub:
-
-🔗 https://github.com/Jgamzz
+https://github.com/Jgamzz
 
 ---
 
 ## 📄 Licença
 
-Projeto desenvolvido para fins acadêmicos e de aprendizado.
+Projeto desenvolvido para fins acadêmicos, aprendizado e demonstração de conhecimentos em Angular, Spring Boot, MySQL e desenvolvimento Full Stack.
