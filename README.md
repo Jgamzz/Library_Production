@@ -1,211 +1,243 @@
-# Library API
+# 📚 Library Production
 
-API backend para gerenciamento de biblioteca, com autenticacao JWT, controle de usuarios/perfis e CRUD de livros com upload de imagem.
+Sistema de gerenciamento de biblioteca desenvolvido com Angular 19, permitindo autenticação de usuários, gerenciamento de livros e controle de acesso administrativo.
 
-## Nome do projeto
-**Library API**
-(artifact atual no Maven: `Teste1`)
+---
 
-## Descricao
-Este projeto e uma API REST em Java com Spring Boot que oferece:
+## 🚀 Tecnologias Utilizadas
 
-- autenticacao via JWT;
-- gerenciamento de usuarios e perfis;
-- gerenciamento de livros;
-- upload e exposicao de imagens dos livros;
-- documentacao interativa via Swagger/OpenAPI.
+### Frontend
+- Angular 19
+- TypeScript
+- RxJS
+- Angular Router
+- Angular Forms
+- HTML5
+- CSS3
 
-## Tecnologias utilizadas
+### Integração
+- REST API
+- JWT Authentication
+- HttpClient
 
-- Java 17
-- Spring Boot 3.2.5
-- Spring Web
-- Spring Data JPA
-- Spring Security
-- JWT (`java-jwt`)
-- MySQL
-- Springdoc OpenAPI (Swagger UI)
-- Lombok
-- Maven
+---
 
-## Estrutura de componentes
+## ✨ Funcionalidades
 
-- **Controllers**
-  - `AuthenticationController` (login)
-  - `UserController` (usuarios)
-  - `ProfileController` (perfis)
-  - `BookController` (livros)
-- **AppService**
-  - `AuthenticationAppService`
-  - `UserAppService`
-  - `ProfileAppService`
-  - `BookAppService`
-- **Domain/Entities**
-  - `User`
-  - `Profile`
-  - `Book`
-- **Repository**
-  - `UserRepository`
-  - `ProfileRepository`
-  - `BookRepository`
-- **Infra**
-  - JWT: `SecurityConfigurations`, `SecurityFilter`, `TokenService`, `OpenAPIConfig`
-  - Config: `WebConfig`, `CustomAuthenticationEntryPoint`, `Error`
-- **DTO**
-  - `AuthenticationDTO`, `UserAddDTO`, `UserListDTO`, `UserProfileDTO`, `BookAddDTO`
+### 🔐 Autenticação
+- Login de usuários
+- Armazenamento de token JWT
+- Controle de sessão
+- Logout seguro
 
-## Pre-requisitos
+### 👤 Cadastro
+- Cadastro de novos usuários
+- Integração com API de usuários
 
-- Java 17+
-- Maven 3.8+
-- MySQL em execucao
-- Banco de dados `Library` criado
+### 📚 Livros
+- Listagem de livros
+- Visualização de detalhes
+- Cadastro de livros
+- Atualização de informações
+- Exclusão de livros
 
-## Configuracao
+### 🛠 Administração
+- Área administrativa para gerenciamento do acervo
+- Controle de permissões baseado em perfil
 
-Ajuste o arquivo `src/main/resources/application.properties` conforme seu ambiente:
+---
 
-- `spring.datasource.url`
-- `spring.datasource.username`
-- `spring.datasource.password`
-- `path.documents`
-- `logging.file.name`
+## 📂 Estrutura do Projeto
 
-> Importante: o projeto usa caminhos absolutos no Windows para logs e imagens.
+```text
+src/
+├── app/
+│   ├── core/
+│   │   ├── models/
+│   │   └── services/
+│   │       ├── auth.service.ts
+│   │       ├── book.service.ts
+│   │       └── user.service.ts
+│   │
+│   ├── views/
+│   │   ├── login/
+│   │   ├── cadastro/
+│   │   ├── principal/
+│   │   ├── detalhe-livro/
+│   │   └── gerenciamento-livro/
+│   │
+│   ├── app.routes.ts
+│   └── app.config.ts
+│
+└── assets/
+```
 
-## Como rodar
+---
 
-### 1) Clonar o repositorio
+## 🗺 Rotas da Aplicação
+
+| Rota | Descrição |
+|--------|------------|
+| `/login` | Tela de login |
+| `/cadastro` | Cadastro de usuários |
+| `/principal` | Página principal |
+| `/livro/:id` | Detalhes do livro |
+| `/admin/livros` | Gerenciamento de livros |
+
+---
+
+## ⚙️ Instalação
+
+### 1. Clonar o repositório
+
 ```bash
-git clone <url-do-repositorio>
-cd Library_Production
+git clone git@github.com:Jgamzz/Library_Production.git
 ```
 
-### 2) Configurar banco MySQL
-Crie o banco:
-```sql
-CREATE DATABASE Library;
-```
+### 2. Acessar o projeto
 
-### 3) Executar a aplicacao
 ```bash
-mvn spring-boot:run
+cd frontend
 ```
 
-A API sobe por padrao em:
-- `http://localhost:8080`
+### 3. Instalar dependências
 
-## Dados iniciais (seed)
-
-Ao iniciar, a aplicacao cria automaticamente (se nao existirem):
-
-- perfis: `Administrator` e `User`;
-- usuario admin:
-  - username: `admin`
-  - password: `1234`
-
-## Autenticacao
-
-A autenticacao e feita por JWT.
-
-1. Faca login em `POST /api/authentication/login`;
-2. Copie o token retornado em `accessToken`;
-3. Envie no header das demais rotas:
-   - `Authorization: Bearer <token>`
-
-## Endpoints
-
-### Autenticacao
-- `POST /api/authentication/login`
-  Realiza login e retorna token JWT.
-
-Exemplo de body:
-```json
-{
-  "username": "admin",
-  "password": "1234"
-}
+```bash
+npm install
 ```
 
-### Usuarios (`/api/users`)
-- `GET /api/users`
-  Lista usuarios.
-- `GET /api/users/profile/me`
-  Retorna perfil do usuario autenticado.
-- `POST /api/users`
-  Cria usuario.
-- `PUT /api/users/{id}`
-  Atualiza usuario.
-- `DELETE /api/users/{id}`
-  Remove usuario.
+### 4. Executar aplicação
 
-Exemplo de criacao:
-```json
-{
-  "username": "novo.usuario",
-  "password": "1234",
-  "name": "Novo Usuario"
-}
+```bash
+ng serve
 ```
 
-### Perfis (`/api/profiles`)
-- `GET /api/profiles`
-  Lista todos os perfis.
+ou
 
-### Livros (`/api/books`)
-- `GET /api/books`
-  Lista livros.
-- `POST /api/books` (multipart/form-data)
-  Cadastra livro com imagem.
-- `PUT /api/books/{id}` (multipart/form-data)
-  Atualiza livro e, opcionalmente, imagem.
-- `DELETE /api/books/{id}`
-  Remove livro e imagem associada.
+```bash
+npm start
+```
 
-#### Formato esperado no multipart de livros
-- `bookDto`: JSON em string com:
-  - `name`
-  - `description`
-  - `author`
-  - `releaseYear`
-- `image`: arquivo da imagem
+---
 
-## Upload e acesso de imagens
+## 🌐 Acesso
 
-- Diretorio fisico de upload: `C:/Users/kaua.moraes/Desktop/Library/imagens/`
-- URL publica mapeada: `/uploads/**`
-- Exemplo de URL gerada para imagem:
-  - `http://localhost:8080/uploads/<arquivo>`
+Após iniciar o servidor:
 
-## Documentacao da API (Swagger)
+```text
+http://localhost:4200
+```
 
-Apos subir a aplicacao, acesse:
+---
 
-- Swagger UI: `http://localhost:8080/swagger-ui/index.html`
-- OpenAPI JSON: `http://localhost:8080/v3/api-docs`
+## 🔑 Autenticação
 
-## Logs
+A aplicação utiliza:
 
-Os logs sao gravados em:
-- `C:/Users/kaua.moraes/Desktop/Library/Log/library_api.log`
+- JWT (JSON Web Token)
+- Header Authorization Bearer Token
+- Controle de perfil de usuário
+- Permissões administrativas
 
-Com rotacao configurada para:
-- 10MB por arquivo;
-- historico de 7 dias.
+Exemplo:
 
-## Tratamento de erros
+```http
+Authorization: Bearer eyJhbGciOi...
+```
 
-- Login invalido retorna `401 Unauthorized`.
-- Requisicoes sem autenticacao em rotas protegidas retornam JSON customizado com mensagem de acesso negado.
+---
 
-## Melhorias recomendadas
+## 🔄 Comunicação com API
 
-- Trocar `NoOpPasswordEncoder` por `BCryptPasswordEncoder`;
-- Externalizar segredo JWT para variavel de ambiente;
-- Remover credenciais sensiveis do `application.properties`;
-- Adicionar testes automatizados (unitarios e integracao);
-- Definir regras explicitas de autorizacao por rota no `SecurityFilterChain`.
+Endpoints utilizados:
 
-## Licenca
+### Autenticação
 
-Defina aqui a licenca do projeto (ex.: MIT).
+```http
+POST /api/authentication/login
+```
+
+### Usuários
+
+```http
+POST /api/users
+GET /api/users/profile/me
+```
+
+### Livros
+
+```http
+GET    /api/books
+GET    /api/books/{id}
+POST   /api/books
+PUT    /api/books/{id}
+DELETE /api/books/{id}
+```
+
+---
+
+## 📸 Telas
+
+### Login
+- Autenticação do usuário
+
+### Cadastro
+- Registro de novos usuários
+
+### Página Principal
+- Visualização do acervo
+
+### Detalhes do Livro
+- Informações completas do livro
+
+### Administração
+- Cadastro e gerenciamento de livros
+
+---
+
+## 🧪 Executando Testes
+
+```bash
+ng test
+```
+
+---
+
+## 📦 Build para Produção
+
+```bash
+ng build
+```
+
+Arquivos gerados:
+
+```text
+dist/
+```
+
+---
+
+## 🔮 Melhorias Futuras
+
+- [ ] Recuperação de senha
+- [ ] Upload avançado de imagens
+- [ ] Filtro e busca de livros
+- [ ] Dashboard administrativo
+- [ ] Histórico de empréstimos
+- [ ] Responsividade mobile
+
+---
+
+## 👨‍💻 Desenvolvedor
+
+**Kauã Teixeira Moraes**
+
+GitHub:
+
+🔗 https://github.com/Jgamzz
+
+---
+
+## 📄 Licença
+
+Projeto desenvolvido para fins acadêmicos e de aprendizado.
