@@ -21,8 +21,9 @@ public class BookAppService {
 
     @Autowired
     private BookRepository bookRepository;
-/// onde salva os arquivos, mudar dps
-    private final String uploadFolder = "C:/Users/kaua.moraes/Desktop/Library/imagens/";
+
+    // CORRIGIDO: Apontando para o caminho global unificado no C:/
+    private final String uploadFolder = "C:/Images/";
 
     public List<Book> listarTodos() {
         return bookRepository.findAll();
@@ -37,9 +38,9 @@ public class BookAppService {
         if (!Files.exists(path)) {
             Files.createDirectories(path);
         }
+
         String extension = image.getOriginalFilename().substring(image.getOriginalFilename().lastIndexOf("."));
         String fileName = UUID.randomUUID().toString() + extension;
-
 
         Files.copy(image.getInputStream(), path.resolve(fileName), StandardCopyOption.REPLACE_EXISTING);
 
@@ -77,18 +78,16 @@ public class BookAppService {
                 }
             } catch (IOException e) {
                 log.error("Erro ao deletar arquivo físico: {}", e.getMessage());
-                throw  new RuntimeException("Falha ao fazer excluão so livro! ");
-                // Opcional: Você pode decidir se interrompe a transação ou apenas loga o erro
+                throw new RuntimeException("Falha ao fazer exclusão do livro! ");
             }
         }
-
 
         bookRepository.delete(book);
         log.info("Registro do livro ID {} removido do banco.", id);
     }
+
     @Transactional
     public Book atualizarComImagem(Integer id, String bookJson, MultipartFile image) throws IOException {
-
         Book livroExistente = bookRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Livro não encontrado com ID: " + id));
 
@@ -105,7 +104,13 @@ public class BookAppService {
 
             String extension = image.getOriginalFilename().substring(image.getOriginalFilename().lastIndexOf("."));
             String fileName = UUID.randomUUID().toString() + extension;
+
+            // Garante a existência da pasta antes de atualizar/copiar o arquivo novo
             Path path = Paths.get(uploadFolder);
+            if (!Files.exists(path)) {
+                Files.createDirectories(path);
+            }
+
             Files.copy(image.getInputStream(), path.resolve(fileName), StandardCopyOption.REPLACE_EXISTING);
 
             livroExistente.setImage("http://localhost:8080/uploads/" + fileName);
